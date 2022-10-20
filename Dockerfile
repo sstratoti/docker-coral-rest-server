@@ -54,6 +54,10 @@ RUN  mkdir /models && \
      curl -q -O  https://raw.githubusercontent.com/google-coral/test_data/master/ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite
 
 
+RUN echo 'SUBSYSTEM==\"apex\", MODE=\"0660\", GROUP=\"apex\"' >> /etc/udev/rules.d/65-apex.rules
+
+RUN groupadd apex
+RUN adduser root apex
 
 WORKDIR /app
 RUN ln -s /dev/stderr coral.log 
