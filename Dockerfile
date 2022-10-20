@@ -51,9 +51,9 @@ RUN  mkdir /models && \
      curl -q -O  https://raw.githubusercontent.com/google-coral/test_data/master/ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite
 
 RUN cd /tmp && \
-    wget "https://github.com/robmarkcole/coral-pi-rest-server/archive/v0.9.zip" -O /tmp/server.zip && \
+    wget "https://github.com/robmarkcole/coral-pi-rest-server/archive/2.1.zip" -O /tmp/server.zip && \
     unzip /tmp/server.zip && \
-    mv coral-pi-rest-server-0.9 /app
+    mv coral-pi-rest-server-2.1 /app
 
 WORKDIR /app
 
