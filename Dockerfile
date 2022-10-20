@@ -40,7 +40,7 @@ RUN apt-get -y install python3-pycoral
 
 # install the APP
 RUN cd /tmp && \
-    wget "https://github.com/robmarkcole/coral-pi-rest-server/archive/refs/tags/v2.1.zip" -O /tmp/server.zip && \
+    wget "https://github.com/robmarkcole/coral-pi-rest-server/archive/refs/tags/2.1.zip" -O /tmp/server.zip && \
     unzip /tmp/server.zip && \
     rm -f /tmp/server.zip && \
     mv coral-pi-rest-server-2.1 /app
