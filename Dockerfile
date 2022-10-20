@@ -43,18 +43,20 @@ RUN cd /tmp && \
     rm -f /tmp/server.zip && \
     mv coral-pi-rest-server-1.0 /app
 
-
+RUN mkdir /models/
+RUN wget https://raw.githubusercontent.com/google-coral/test_data/master/ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite -O /models/ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite
+RUN wget https://raw.githubusercontent.com/google-coral/test_data/master/ssdlite_mobiledet_coco_qat_postprocess_edgetpu.tflite -O /models/ssdlite_mobiledet_coco_qat_postprocess_edgetpu.tflite
+RUN wget https://raw.githubusercontent.com/google-coral/test_data/master/tf2_ssd_mobilenet_v2_coco17_ptq_edgetpu.tflite -O /models/tf2_ssd_mobilenet_v2_coco17_ptq_edgetpu.tflite
+RUN wget https://raw.githubusercontent.com/google-coral/test_data/master/coco_labels.txt -O /models/coco_labels.txt
 
 WORKDIR /app
-RUN  pip3 install --no-cache-dir -r requirements.txt 
 
-# Temporarily using my own code until https://github.com/robmarkcole/coral-pi-rest-server/issues/67 is resolved
 RUN wget https://raw.githubusercontent.com/grinco/coral-pi-rest-server/v1.0/coral-app.py -O /app/coral-app.py
 RUN ln -s /dev/stderr coral.log 
 
-ENV MODEL=ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite \
+ENV MODEL=ssdlite_mobiledet_coco_qat_postprocess_edgetpu.tflite \
     LABELS=coco_labels.txt \
-    MODELS_DIRECTORY=models
+    MODELS_DIRECTORY=/models/
 
 EXPOSE 5000
 
