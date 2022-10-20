@@ -59,7 +59,7 @@ WORKDIR /app
 
 RUN  pip3 install --no-cache-dir -r requirements.txt 
 
-ENV MODEL=tf2_ssd_mobilenet_v2_coco17_ptq_edgetpu.tflite \
+ENV MODEL=ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite \
     LABELS=coco_labels.txt \
     MODELS_DIRECTORY=/models/
 
