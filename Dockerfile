@@ -53,7 +53,9 @@ RUN wget https://raw.githubusercontent.com/google-coral/test_data/master/coco_la
 
 WORKDIR /app
 
-#RUN wget https://raw.githubusercontent.com/grinco/coral-pi-rest-server/v1.0/coral-app.py -O /app/coral-app.py
+# RUN wget https://raw.githubusercontent.com/grinco/coral-pi-rest-server/v1.0/coral-app.py -O /app/coral-app.py
+RUN wget https://raw.githubusercontent.com/robmarkcole/coral-pi-rest-server/v1x/coral-app.py -O /app/coral-app.py
+
 RUN ln -s /dev/stderr coral.log 
 
 ENV MODEL=ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite \
