@@ -28,7 +28,7 @@ FROM ubuntu:18.04
 WORKDIR /tmp
 
 RUN apt-get update && apt-get install -y python3 wget curl unzip python3-pip
-RUN apt-get install -y python3-pycoral
+RUN apt-get update && apt-get install -y python3-pycoral
 
 # downloading library file for edgetpu and install it
 RUN wget --trust-server-names -O edgetpu_api.tar.gz  https://dl.google.com/coral/edgetpu_api/edgetpu_api_latest.tar.gz && \
