@@ -29,6 +29,9 @@ WORKDIR /tmp
 
 RUN apt-get update && apt-get install -y gnupg curl 
 RUN apt-get update && apt-get install -y wget unzip python3
+RUN apt-get update && apt-get install -y python3-pip
+
+
 RUN echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | tee /etc/apt/sources.list.d/coral-edgetpu.list
 RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 
