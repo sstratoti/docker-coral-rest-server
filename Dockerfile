@@ -43,6 +43,8 @@ RUN cd /tmp && \
     rm -f /tmp/server.zip && \
     mv coral-pi-rest-server-1.0 /app
 
+RUN  pip3 install --no-cache-dir -r /app/requirements.txt
+
 RUN mkdir /models/
 RUN wget https://raw.githubusercontent.com/google-coral/test_data/master/ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite -O /models/ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite
 RUN wget https://raw.githubusercontent.com/google-coral/test_data/master/ssdlite_mobiledet_coco_qat_postprocess_edgetpu.tflite -O /models/ssdlite_mobiledet_coco_qat_postprocess_edgetpu.tflite
