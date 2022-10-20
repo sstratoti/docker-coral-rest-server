@@ -59,7 +59,7 @@ RUN ln -s /dev/stderr coral.log
 
 ENV MODEL=ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite \
     LABELS=coco_labels.txt \
-    MODELS_DIRECTORY=/models/
+    MODELS_DIRECTORY=models
 
 EXPOSE 5000
 
