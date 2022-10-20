@@ -36,7 +36,6 @@ RUN echo "deb https://packages.cloud.google.com/apt coral-cloud-stable main" | t
 
 RUN apt-get update && apt-get install -y python3 wget curl unzip python3-pip
 RUN apt-get -y install python3-edgetpu libedgetpu1-legacy-std
-RUN apt-get -y install python3-pycoral
 
 # install the APP
 RUN cd /tmp && \
@@ -56,7 +55,7 @@ RUN wget https://dl.google.com/coral/canned_models/coco_labels.txt -O /models/co
 
 WORKDIR /app
 
-# RUN wget https://raw.githubusercontent.com/grinco/coral-pi-rest-server/v1.0/coral-app.py -O /app/coral-app.py
+RUN wget https://raw.githubusercontent.com/grinco/coral-pi-rest-server/v1.0/coral-app.py -O /app/coral-app.py
 RUN ln -s /dev/stderr coral.log 
 
 ENV MODEL=ssdlite_mobiledet_coco_qat_postprocess_edgetpu.tflite \
