@@ -23,25 +23,23 @@
 #  that's mounted in the container, and then starting the container,
 #  passing in environment variables MODEL and LABELS referring to
 #  the files.
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 WORKDIR /tmp
 
-RUN apt-get update && apt-get install -y python3 wget curl unzip python3-pip
-RUN apt-get update && apt-get install -y python3-pycoral
+RUN apt-get update && apt-get install -y gnupg curl
+RUN echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | tee /etc/apt/sources.list.d/coral-edgetpu.list
+RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 
-# downloading library file for edgetpu and install it
-RUN wget --trust-server-names -O edgetpu_api.tar.gz  https://dl.google.com/coral/edgetpu_api/edgetpu_api_latest.tar.gz && \
-    tar xzfz edgetpu_api.tar.gz && rm edgetpu_api.tar.gz && \
-    cd edgetpu_api && \
-    sed -i.orig  \
-    	-e 's/^read USE_MAX_FREQ/USE_MAX_FREQ=y/' \
-	-e 's/apt-get install/apt-get install --no-install-recommends/'  \
-	-e '/^UDEV_RULE_PATH=/,/udevadm trigger/d'  \
-    -e 's/^OS_VERSION=.*/OS_VERSION=Ubuntu/' \
-      install.sh && \
-    apt-get update && apt-get install sudo && \
-    bash ./install.sh
+RUN apt-get update && apt-get install -y python3-edgetpu libedgetpu1-std 
+
+RUN cd /tmp && \
+    wget "https://github.com/robmarkcole/coral-pi-rest-server/archive/refs/tags/2.1.zip" -O /tmp/server.zip && \
+    unzip /tmp/server.zip && \
+    rm -f /tmp/server.zip && \
+    mv coral-pi-rest-server-2.1 /app
+
+RUN  pip3 install --no-cache-dir -r /app/requirements.txt
 
 # fetch the models.  maybe figure a way to conditionalize this?
 # create models subdirectory for volume mount of custom models
@@ -51,14 +49,9 @@ RUN  mkdir /models && \
      curl -q -O  https://raw.githubusercontent.com/google-coral/test_data/master/coco_labels.txt && \
      curl -q -O  https://raw.githubusercontent.com/google-coral/test_data/master/ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite
 
-RUN cd /tmp && \
-    wget "https://github.com/robmarkcole/coral-pi-rest-server/archive/2.1.zip" -O /tmp/server.zip && \
-    unzip /tmp/server.zip && \
-    mv coral-pi-rest-server-2.1 /app
 
 WORKDIR /app
-
-RUN  pip3 install --no-cache-dir -r requirements.txt 
+RUN ln -s /dev/stderr coral.log 
 
 ENV MODEL=ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite \
     LABELS=coco_labels.txt \
