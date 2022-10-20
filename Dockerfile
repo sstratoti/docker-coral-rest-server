@@ -31,7 +31,7 @@ RUN apt-get update && apt-get install -y gnupg curl
 RUN echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | tee /etc/apt/sources.list.d/coral-edgetpu.list
 RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 
-RUN apt-get update && apt-get install -y python3-edgetpu libedgetpu1-std 
+RUN apt-get update && apt-get install -y python3-pycoral libedgetpu1-std 
 
 RUN cd /tmp && \
     wget "https://github.com/robmarkcole/coral-pi-rest-server/archive/refs/tags/2.1.zip" -O /tmp/server.zip && \
