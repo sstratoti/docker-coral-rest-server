@@ -11,15 +11,20 @@
 #
 #  docker run --restart=always --detach --name coral \
 #          -p 5000:5000 --device /dev/bus/usb:/dev/bus/usb   coral:latest
-#
 #  It's necessary to pass in the /dev/bus/usb device to communicate with the USB stick.
+#
+# OR pci-e
+#
+#  docker run --restart=always --detach --name coral \
+#          -p 5000:5000 --device /dev/apex_0:/dev/apex_0   coral:latest
+#
 #
 #  You can use alternative models by putting them into a directory
 #  that's mounted in the container, and then starting the container,
 #  passing in environment variables MODEL and LABELS referring to
 #  the files.
 
-FROM ubuntu:18.04
+FROM ubuntu:22.04
 
 WORKDIR /tmp
 
@@ -47,9 +52,9 @@ RUN  mkdir /models && \
      curl -q -O  https://dl.google.com/coral/canned_models/mobilenet_ssd_v2_face_quant_postprocess_edgetpu.tflite
 
 RUN cd /tmp && \
-    wget "https://github.com/robmarkcole/coral-pi-rest-server/archive/v0.9.zip" -O /tmp/server.zip && \
+    wget "https://github.com/robmarkcole/coral-pi-rest-server/archive/refs/tags/2.1.zip" -O /tmp/server.zip && \
     unzip /tmp/server.zip && \
-    mv coral-pi-rest-server-0.9 /app
+    mv coral-pi-rest-server-2.1 /app
 
 WORKDIR /app
 
