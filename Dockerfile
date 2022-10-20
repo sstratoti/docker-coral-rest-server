@@ -27,7 +27,7 @@ FROM ubuntu:20.04
 
 WORKDIR /tmp
 
-RUN apt-get update && apt-get install -y gnupg
+RUN apt-get update && apt-get install -y gnupg curl
 RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 
 RUN echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | tee /etc/apt/sources.list.d/coral-edgetpu.list
@@ -58,6 +58,5 @@ ENV MODEL=ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite \
 
 EXPOSE 5000
 
-# CMD  exec python3 coral-app.py --model  "${MODEL}" --labels "${LABELS}" --models_directory "${MODELS_DIRECTORY}"
-CMD  exec python3 coral-app.py
+CMD exec python3 coral-app.py --model  "${MODEL}" --labels "${LABELS}" --models_directory "${MODELS_DIRECTORY}"
 
