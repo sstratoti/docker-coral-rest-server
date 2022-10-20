@@ -54,8 +54,6 @@ RUN  mkdir /models && \
      curl -q -O  https://raw.githubusercontent.com/google-coral/test_data/master/ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite
 
 
-RUN adduser root apex
-RUN usermod -aG plugdev root
 
 WORKDIR /app
 RUN ln -s /dev/stderr coral.log 
