@@ -28,7 +28,7 @@ FROM ubuntu:22.04
 
 WORKDIR /tmp
 
-RUN apt-get update && apt-get install -y gnupg curl
+RUN apt-get update && apt-get install -y gnupg curl software-properties-common
 RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 
 RUN echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | tee /etc/apt/sources.list.d/coral-edgetpu.list
