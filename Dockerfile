@@ -46,9 +46,9 @@ RUN wget --trust-server-names -O edgetpu_api.tar.gz  https://dl.google.com/coral
 # create models subdirectory for volume mount of custom models
 RUN  mkdir /models && \
      chdir /models && \
-     curl -q -O  https://dl.google.com/coral/canned_models/mobilenet_ssd_v2_coco_quant_postprocess_edgetpu.tflite  && \
-     curl -q -O  https://dl.google.com/coral/canned_models/coco_labels.txt && \
-     curl -q -O  https://dl.google.com/coral/canned_models/mobilenet_ssd_v2_face_quant_postprocess_edgetpu.tflite
+     curl -q -O  https://raw.githubusercontent.com/google-coral/test_data/master/tf2_ssd_mobilenet_v2_coco17_ptq_edgetpu.tflite  && \
+     curl -q -O  https://raw.githubusercontent.com/google-coral/test_data/master/coco_labels.txt && \
+     curl -q -O  https://raw.githubusercontent.com/google-coral/test_data/master/ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite
 
 RUN cd /tmp && \
     wget "https://github.com/robmarkcole/coral-pi-rest-server/archive/v0.9.zip" -O /tmp/server.zip && \
