@@ -63,6 +63,6 @@ ENV MODEL=ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite \
 
 EXPOSE 5000
 
-CMD  exec python3 coral-app.py --model  "${MODEL}" --labels "${LABELS}" --models_directory "${MODELS_DIRECTORY}"
-
+# CMD  exec python3 coral-app.py --model  "${MODEL}" --labels "${LABELS}" --models_directory "${MODELS_DIRECTORY}"
+CMD  exec python3 coral-app.py
 
