@@ -34,7 +34,8 @@ RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 RUN echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | tee /etc/apt/sources.list.d/coral-edgetpu.list
 RUN echo "deb https://packages.cloud.google.com/apt coral-cloud-stable main" | tee /etc/apt/sources.list.d/coral-cloud.list
 
-RUN apt-get update && apt-get install -y python3 wget curl unzip python3-pip
+RUN add-apt-repository ppa:deadsnakes/ppa
+RUN apt-get update && apt-get install -y python3.8 wget curl unzip python3-pip
 RUN apt-get -y install python3-edgetpu libedgetpu1-legacy-std
 RUN apt-get -y install python3-pycoral
 
