@@ -25,6 +25,9 @@
 #  the files.
 FROM ubuntu:20.04
 
+ENV TZ=America/New_York
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 WORKDIR /tmp
 
 RUN apt-get update && apt-get install -y gnupg curl
@@ -33,7 +36,7 @@ RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 RUN echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | tee /etc/apt/sources.list.d/coral-edgetpu.list
 RUN echo "deb https://packages.cloud.google.com/apt coral-cloud-stable main" | tee /etc/apt/sources.list.d/coral-cloud.list
 
-RUN apt-get update && apt-get install -y python3 wget unzip python3-pip
+RUN apt-get update && apt-get install -y python3.9 python3.9-dev wget unzip python3-pip
 RUN apt-get -y install libedgetpu1-std python3-pycoral
 
 # install the APP
