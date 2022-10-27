@@ -34,14 +34,14 @@ RUN echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" |
 RUN echo "deb https://packages.cloud.google.com/apt coral-cloud-stable main" | tee /etc/apt/sources.list.d/coral-cloud.list
 
 RUN apt-get update && apt-get install -y python3 wget unzip python3-pip
-RUN apt-get -y install python3-edgetpu libedgetpu1-legacy-std
+RUN apt-get -y install libedgetpu1-std python3-pycoral
 
 # install the APP
 RUN cd /tmp && \
-    wget "https://github.com/robmarkcole/coral-pi-rest-server/archive/refs/tags/v1.0.zip" -O /tmp/server.zip && \
+    wget "https://github.com/robmarkcole/coral-pi-rest-server/archive/refs/tags/2.1.zip" -O /tmp/server.zip && \
     unzip /tmp/server.zip && \
     rm -f /tmp/server.zip && \
-    mv coral-pi-rest-server-1.0 /app
+    mv coral-pi-rest-server-2.1 /app
 
 RUN  pip3 install --no-cache-dir -r /app/requirements.txt
 
@@ -53,7 +53,7 @@ RUN wget https://raw.githubusercontent.com/google-coral/test_data/master/coco_la
 
 WORKDIR /app
 
-RUN wget https://raw.githubusercontent.com/grinco/coral-pi-rest-server/v1.0/coral-app.py -O /app/coral-app.py
+RUN wget https://raw.githubusercontent.com/sstratoti/coral-pi-rest-server/master/coral-app.py -O /app/coral-app.py
 RUN ln -s /dev/stderr coral.log 
 
 ENV MODEL=ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite \
