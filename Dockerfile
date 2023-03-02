@@ -44,7 +44,7 @@ RUN cd /tmp && \
     wget "https://github.com/robmarkcole/coral-pi-rest-server/archive/refs/tags/2.2.zip" -O /tmp/server.zip && \
     unzip /tmp/server.zip && \
     rm -f /tmp/server.zip && \
-    mv coral-pi-rest-server-2.1 /app
+    mv coral-pi-rest-server-2.2 /app
 
 RUN  pip3 install --no-cache-dir -r /app/requirements.txt
 
